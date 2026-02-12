@@ -1,17 +1,26 @@
-#17
-nums=[1,2,3,4,5,6,7,8,9]
-analyze_numbers=lambda nums: list(
-    map(
-        lambda x: x**2,
-        filter(
-            lambda x: (
-                (x%3==0 or x%5==0) and
-                (x%15!=0) and
-                (len(str(abs(x)))%2==1)
-            ),
-            nums
-        )
-    )
-)
+#1
+def analyze_text(text):
+    vowels=set("aeiouyаеёиоуыэюя")
 
-print(analyze_numbers(nums))
+    cleaned=""
+    for ch in text.lower():
+        if ch.isalpha() or ch==" ":
+            cleaned=cleaned+ch
+
+    unique_vowels=set()
+    for ch in cleaned:
+        if ch in vowels:
+            unique_vowels.add(ch)
+
+    words=cleaned.split()
+
+    result_words=[]
+    seen=set()
+    for word in words:
+        if (len(word) >=5 and
+            word[0] == word[-1] and
+            word not in seen):
+            result_words.append(word)
+            seen.add(word)
+
+     return (len(unique_vowels), " ".join(result_words))
